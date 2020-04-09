@@ -15,7 +15,6 @@ async function run() {
         // We only care about `pull_request` and `push` events as they're the only
         // ones that can change commit messages or files
         const eventName = github.context.eventName;
-        const event = github.event;
 
         if (eventName == 'push' || eventName == 'pull_request') {
             const mergeCommitSha = github.context.sha;
@@ -25,11 +24,11 @@ async function run() {
             console.log(repoName);
             console.log(excludedPaths);
 
-            // const commit = await octokit.git.getCommit(
-                // repoOwner,
-                // repoName,
-                // "cb984466aacf2c39a142a9726e3be8d46709c8bf"
-            // );
+            const commit = await octokit.git.getCommit(
+                repoOwner,
+                repoName,
+                "cb984466aacf2c39a142a9726e3be8d46709c8bf"
+            );
         } else {
             core.setOutput('stop-code', 'nothing')
         }

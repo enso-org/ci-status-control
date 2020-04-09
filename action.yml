@@ -5,12 +5,6 @@ branding:
 description: |
   'Allows users to skip the CI pipeline based on commit messages or file paths.'
 inputs:
-  github-repo:
-    description: 'The GitHub repository owner and name.'
-    required: true
-  github-token:
-    description: 'GitHub authentiction token.'
-    required: true
   excluded-paths:
     description: 'A list of paths that should be excluded from CI.'
     required: false
