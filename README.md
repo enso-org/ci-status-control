@@ -5,6 +5,11 @@ status, or trigger the status itself.
 
 ## Inputs
 
+### `run-id`
+The workflow run identifier.
+
+- **Optional:** `false`
+
 ### `github-token`
 A GitHub authentication token.
 
@@ -27,6 +32,17 @@ The string in the commit message used to skip the CI run.
 
 - **Optional:** `true`
 - **Default:** `[skip ci]`
+
+## Outputs
+
+### `stop-code`
+The result of executing the action. It can be one of:
+
+- `continue`: When the check wants to let the workflow continue.
+- `cancel`: When the check thinks the workflow should be cancelled.
+- `skip`: When the check thinks the workflow should be skipped.
+- `neutral`: When the check thinks the workflow should have a neutral status.
+- `fail`: When the check thinks the workflow should fail.
 
 ## Example Usage
 
