@@ -1,16 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-function processPushEvent(github, octokit, event, excludedPaths, stopInternally) {
-    console.log("processPushEvent");
-}
-
-/** This function makes use of the fact that a PR event generates a merge commit
- *  that contains _all_ the changes in the PR.
- */
-function processPREvent(github, octokit, event, excludedPaths, stopInternally) {
-}
-
 async function run() {
     try {
         const githubToken = core.getInput('github-token');
@@ -27,9 +17,10 @@ async function run() {
 
         if (eventName == 'push' || eventName == 'pull_request') {
             const mergeCommitSha = github.context.sha;
-            const repoName = github.context.repoName;
-            const repoOwner = github.context.repoOwner;
+            const repoName = await github.context.repoName;
+            const repoOwner = await github.context.repoOwner;
 
+            console.log(context);
             console.log(mergeCommitSha);
             console.log(repoName);
             console.log(repoOwner);
