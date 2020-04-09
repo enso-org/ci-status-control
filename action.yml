@@ -1,4 +1,4 @@
-name: 'Skip CI'
+name: 'CI Status Control'
 branding:
   icon: 'check-circle'
   color: 'white'

@@ -1,4 +1,4 @@
-# Skip CI Action
+# CI Status Control
 This action allows you to trigger different CI statuses based on the changed
 files or commands in commit messages. It can be configured to either output the
 status, or trigger the status itself.
