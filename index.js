@@ -50,10 +50,10 @@ async function run() {
 
                 if (stopInternally) {
                     console.log(checkId);
-                    const run = await octokit.checks.get({
+                    const run = await octokit.checks.listForRef({
                         owner: repoOwner,
                         repo: repoName,
-                        check_run_id: checkId
+                        ref: commitHash
                     });
 
                     console.log(run);
