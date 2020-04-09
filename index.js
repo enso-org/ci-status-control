@@ -20,8 +20,6 @@ async function run() {
         const excludedPaths = core.getInput('excluded-paths').split('\n');
         const stopInternally = core.getInput('stop-internally');
 
-        console.log(github.context.sha);
-
         // We only care about `pull_request` and `push` events as they're the only
         // ones that can change commit messages or files
         const eventName = github.context.eventName;
@@ -33,17 +31,14 @@ async function run() {
             const repoOwner = github.context.repoOwner;
 
             console.log(mergeCommitSha);
+            console.log(repoName);
+            console.log(repoOwner);
 
-            const commit = await octokit.git.getCommit({
+            const commit = await octokit.git.getCommit(
                 repoOwner,
                 repoName,
-                mergeCommitSha
-            });
-
-            // octokit.git.getCommit({repoOwner, repoName, mergeCommitSha})
-                // .then((commit) => {
-                    // console.log(commit.files);
-                // });
+                "cb984466aacf2c39a142a9726e3be8d46709c8bf"
+            );
         } else {
             core.setOutput('stop-code', 'nothing')
         }
