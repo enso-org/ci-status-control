@@ -5,6 +5,11 @@ status, or trigger the status itself.
 
 ## Inputs
 
+### `github-token`
+A GitHub authentication token.
+
+- **Optional:** `false`
+
 ### `excluded-paths`
 A list of paths that should be excluded from CI.
 
@@ -24,7 +29,7 @@ name: Skip CI On Files
 uses: luna/skip-ci-action@0.1
 with:
     github-repo: ${{ env.GITHUB_REPOSITORY }}
-    github-token: ${{ secrets.GITHUB_TOKENt }}
+    github-token: ${{ secrets.GITHUB_TOKEN }}
     excluded-paths:
     - /doc/*
     - README.md

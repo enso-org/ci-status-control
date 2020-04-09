@@ -3,7 +3,8 @@ const github = require('@actions/github');
 
 async function run() {
     try {
-        const octokit = new github.GitHub(github.context.githubToken);
+        const token = core.getInput('github-token');
+        const octokit = new github.GitHub(token);
 
         // `who-to-greet` input defined in action metadata file
         const excludedPaths = core.getInput('excluded-paths').split('\n');
@@ -12,12 +13,12 @@ async function run() {
         const repoOwner = github.context.repo.owner
         const repoName = github.context.repo.repo
 
-        // We only care about `pull_request` and `push` events as they're the only
-        // ones that can change commit messages or files
+        // We only care about `pull_request` and `push` events as they're the
+        // only ones that can change commit messages or files
         const eventName = github.context.eventName;
 
         if (eventName == 'push' || eventName == 'pull_request') {
-            const mergeCommitSha = github.context.sha;
+            const commitHash = github.context.sha;
 
             console.log(mergeCommitSha);
             console.log(repoOwner);
@@ -27,14 +28,11 @@ async function run() {
             const commit = await octokit.git.getCommit({
                 owner: repoOwner,
                 repo: repoName,
-                commit_sha: "cb984466aacf2c39a142a9726e3be8d46709c8bf"
+                commit_sha: commitHash
             });
         } else {
             core.setOutput('stop-code', 'nothing')
         }
-
-        // const payload = JSON.stringify(github.context.payload, undefined, 2)
-        // console.log(`The event payload: ${payload}`);
     } catch (error) {
         core.setFailed(error.message);
     }
