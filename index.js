@@ -3,16 +3,15 @@ const github = require('@actions/github');
 
 async function run() {
     try {
-        const githubToken = core.getInput('github-token');
+        const githubToken = github.context.token;
         const octokit = new github.GitHub(githubToken);
 
         // `who-to-greet` input defined in action metadata file
         const excludedPaths = core.getInput('excluded-paths').split('\n');
         const stopInternally = core.getInput('stop-internally');
-        const repoPath = core.getInput('github-repo').split("/");
 
-        const repoOwner = repoPath[0]
-        const repoName = repoPath[1]
+        const [repoOwner, ...rest] = github.context.repository.split("/");
+        const repoName = rest.join("/");
 
         // We only care about `pull_request` and `push` events as they're the only
         // ones that can change commit messages or files
@@ -22,7 +21,6 @@ async function run() {
         if (eventName == 'push' || eventName == 'pull_request') {
             const mergeCommitSha = github.context.sha;
 
-            console.log(github.repository);
             console.log(mergeCommitSha);
             console.log(repoOwner);
             console.log(repoName);
