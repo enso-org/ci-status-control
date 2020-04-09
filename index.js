@@ -50,13 +50,13 @@ async function run() {
 
                 if (stopInternally) {
                     console.log(checkId);
-                    const run = await octokit.checks.listForRef({
+                    const checks = await octokit.checks.listForRef({
                         owner: repoOwner,
                         repo: repoName,
                         ref: headCommitHash
                     });
 
-                    console.log(run);
+                    console.log(checks.data.check_runs);
                 }
             } else {
                 console.log("NO SKIP");
