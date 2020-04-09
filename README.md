@@ -5,6 +5,11 @@ status, or trigger the status itself.
 
 ## Inputs
 
+### 'github-token'
+A GitHub authentication token.
+
+- **Optional:** `false`
+
 ### `excluded-paths`
 A list of paths that should be excluded from CI.
 
