@@ -42,21 +42,27 @@ async function run() {
                 commit_sha: headCommitHash
             });
 
-            const checkId = core.getInput('run-id');
+            const actionId = core.getInput('run-id');
 
             if (headCommit.data.message.includes(skipCIMessage)) {
                 console.log("SKIP");
                 core.setOutput('stop-code', 'cancel');
 
                 if (stopInternally) {
-                    console.log(checkId);
+                    console.log(actionId);
                     const checks = await octokit.checks.listForRef({
                         owner: repoOwner,
                         repo: repoName,
                         ref: headCommitHash
                     });
 
-                    console.log(checks.data.check_runs);
+                    const currentAction = octokit.actions.getWorkflowRun({
+                        owner: repoOwner,
+                        repo: repoName,
+                        run_id: actionId
+                    });
+
+                    console.log(currentAction);
                 }
             } else {
                 console.log("NO SKIP");
