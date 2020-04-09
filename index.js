@@ -3,14 +3,13 @@ const github = require('@actions/github');
 
 async function run() {
     try {
-        const githubToken = github.context.token;
-        const octokit = new github.GitHub(githubToken);
+        const octokit = new github.GitHub(github.context.githubToken);
 
         // `who-to-greet` input defined in action metadata file
         const excludedPaths = core.getInput('excluded-paths').split('\n');
         const stopInternally = core.getInput('stop-internally');
 
-        const [repoOwner, ...rest] = github.context.repository.split("/");
+        const [repoOwner, ...rest] = github.context.repo.split("/");
         const repoName = rest.join("/");
 
         // We only care about `pull_request` and `push` events as they're the only
