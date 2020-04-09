@@ -50,6 +50,7 @@ The result of executing the action. It can be one of:
 name: Conditionally Skip CI
 uses: luna/skip-ci-action@0.1
 with:
+    run-id: ${{ github.run_id }}
     github-token: ${{ github.token }}
     excluded-paths:
     - /doc/*

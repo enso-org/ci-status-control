@@ -46,20 +46,16 @@ async function run() {
 
             if (headCommit.data.message.includes(skipCIMessage)) {
                 console.log("SKIP");
-                console.log(excludedPaths);
-
                 core.setOutput('stop-code', 'cancel');
 
                 if (stopInternally) {
-                    console.log(checkId);
-                    // await octokit.checks.update({
-                        // owner: repoOwner,
-                        // repo: repoName,
-                        // check_run_id: null,
-                        // status: "completed",
-                        // conclusion: "cancelled"
-                        //
-                    // });
+                    await octokit.checks.update({
+                        owner: repoOwner,
+                        repo: repoName,
+                        check_run_id: checkId,
+                        status: "completed",
+                        conclusion: "cancelled"
+                    });
                 }
             } else {
                 console.log("NO SKIP");
