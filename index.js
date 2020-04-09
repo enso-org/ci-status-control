@@ -49,13 +49,13 @@ async function run() {
                 core.setOutput('stop-code', 'cancel');
 
                 if (stopInternally) {
-                    await octokit.checks.update({
+                    const run = await octokit.checks.get({
                         owner: repoOwner,
                         repo: repoName,
-                        check_run_id: checkId,
-                        status: "completed",
-                        conclusion: "cancelled"
+                        check_run_id: checkId
                     });
+
+                    console.log(run);
                 }
             } else {
                 console.log("NO SKIP");
