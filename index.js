@@ -24,11 +24,11 @@ async function run() {
             console.log(repoName);
             console.log(excludedPaths);
 
-            const commit = await octokit.git.getCommit(
-                repoOwner,
-                repoName,
-                "cb984466aacf2c39a142a9726e3be8d46709c8bf"
-            );
+            const commit = await octokit.git.getCommit({
+                owner: repoOwner,
+                repo: repoName,
+                commit_sha: "cb984466aacf2c39a142a9726e3be8d46709c8bf"
+            });
         } else {
             core.setOutput('stop-code', 'nothing')
         }
