@@ -26,7 +26,7 @@ async function run() {
                 commit_sha: commitHash
             });
 
-            console.log(commit.message);
+            console.log(commit);
         } else {
             core.setOutput('stop-code', 'nothing')
         }
