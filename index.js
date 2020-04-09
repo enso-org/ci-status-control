@@ -1,15 +1,23 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-function processPushEvent(octokit, event, excludedPaths, stopInternally) {
+function processPushEvent(github, octokit, event, excludedPaths, stopInternally) {
     console.log("processPushEvent");
 }
 
-function processPREvent(octokit, event, excludedPaths, stopInternally) {
-    const body = event.pull_request;
-    const headCommitHash = body.head.sha;
+/** This function makes use of the fact that a PR event generates a merge commit
+ *  that contains _all_ the changes in the PR.
+ */
+function processPREvent(github, octokit, event, excludedPaths, stopInternally) {
+    const mergeCommitSha = github.context.sha;
+    const repoName = github.context.repoName;
+    const repoOwner = github.context.repoOwner;
 
-    console.log(headCommitHash);
+    const commit = octokit.git.getCommit({repoOwner, repoName, mergeCommitSha});
+
+    const files = commit.files;
+
+    console.log(files);
 }
 
 try {
