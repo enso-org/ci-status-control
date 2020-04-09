@@ -56,7 +56,7 @@ async function run() {
                         ref: headCommitHash
                     });
 
-                    const currentAction = await octokit.actions.getWorkflowRun({
+                    const currentAction = await octokit.actions.getWorkflowJob({
                         owner: repoOwner,
                         repo: repoName,
                         run_id: actionId
