@@ -9,15 +9,6 @@ function processPushEvent(github, octokit, event, excludedPaths, stopInternally)
  *  that contains _all_ the changes in the PR.
  */
 function processPREvent(github, octokit, event, excludedPaths, stopInternally) {
-    const mergeCommitSha = github.context.sha;
-    const repoName = github.context.repoName;
-    const repoOwner = github.context.repoOwner;
-
-    const commit = octokit.git.getCommit({repoOwner, repoName, mergeCommitSha});
-
-    const files = commit.files;
-
-    console.log(files);
 }
 
 try {
@@ -35,10 +26,15 @@ try {
     const eventName = github.context.eventName;
     const event = github.event;
 
-    if (eventName == 'push') {
-        processPushEvent(github, octokit, event, excludedPaths, stopInternally);
-    } else if (eventName == 'pull_request') {
-        processPREvent(github, octokit, event, excludedPaths, stopInternally);
+    if (eventName == 'push' || eventName == 'pull_request') {
+        const mergeCommitSha = github.context.sha;
+        const repoName = github.context.repoName;
+        const repoOwner = github.context.repoOwner;
+
+        octokit.git.getCommit({repoOwner, repoName, mergeCommitSha})
+            .then((commit) => {
+                console.log(commit.files);
+            });
     } else {
         core.setOutput('stop-code', 'nothing')
     }
