@@ -53,7 +53,7 @@ async function run() {
                     const run = await octokit.checks.listForRef({
                         owner: repoOwner,
                         repo: repoName,
-                        ref: commitHash
+                        ref: headCommitHash
                     });
 
                     console.log(run);
