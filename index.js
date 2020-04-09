@@ -59,7 +59,7 @@ async function run() {
                     const currentAction = await octokit.actions.getWorkflowJob({
                         owner: repoOwner,
                         repo: repoName,
-                        run_id: actionId
+                        job_id: actionId
                     });
 
                     console.log(currentAction);
