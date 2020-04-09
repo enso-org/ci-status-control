@@ -42,7 +42,7 @@ async function run() {
                 commit_sha: headCommitHash
             });
 
-            const checkId = github.context.action
+            const checkId = github.context;
 
             if (headCommit.data.message.includes(skipCIMessage)) {
                 console.log("SKIP");
