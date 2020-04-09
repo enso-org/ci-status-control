@@ -46,6 +46,7 @@ async function run() {
 
             if (headCommit.data.message.includes(skipCIMessage)) {
                 console.log("SKIP");
+                console.log(excludedPaths);
 
                 core.setOutput('stop-code', 'cancel');
 
