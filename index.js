@@ -36,9 +36,9 @@ try {
     const event = github.event;
 
     if (eventName == 'push') {
-        processPushEvent(event, excludedPaths, stopInternally);
+        processPushEvent(github, octokit, event, excludedPaths, stopInternally);
     } else if (eventName == 'pull_request') {
-        processPREvent(event, excludedPaths, stopInternally);
+        processPREvent(github, octokit, event, excludedPaths, stopInternally);
     } else {
         core.setOutput('stop-code', 'nothing')
     }
