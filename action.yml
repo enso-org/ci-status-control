@@ -1,0 +1,38 @@
+name: 'Skip CI'
+branding:
+  icon: 'check-circle'
+  color: 'white'
+description: |
+  'Allows users to skip the CI pipeline based on commit messages or file paths.'
+inputs:
+  run-id:
+    description: 'The workflow run identifier'
+    required: true
+  github-token:
+    description: 'GitHub authentiction token.'
+    required: true
+  excluded-paths:
+    description: 'A list of paths that should be excluded from CI.'
+    required: false
+    default: '[]'
+  stop-internally:
+    description: 'Whether or not the action should stop the workflow itself.'
+    required: false
+    default: 'true'
+  skip-ci-message:
+    description: 'The string in the commit message to skip the CI run.'
+    required: false
+    default: '[skip ci]'
+outputs:
+  stop-code:
+    description: |
+      The behaviour of the action:
+      - `continue`
+      - `cancel`
+      - `skip`
+      - `neutral`
+      - `fail`
+runs:
+  using: 'node12'
+  main: 'index.js'
+
