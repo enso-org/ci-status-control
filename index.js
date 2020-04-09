@@ -41,7 +41,7 @@ async function run() {
             });
 
             console.log(commit.data.message);
-            console.log(headCheadCommit.data.message);
+            console.log(headCommit.data.message);
         } else {
             core.setOutput('stop-code', 'nothing')
         }
