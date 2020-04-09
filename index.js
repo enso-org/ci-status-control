@@ -18,6 +18,16 @@ async function run() {
         const eventName = github.context.eventName;
 
         if (eventName == 'push' || eventName == 'pull_request') {
+            var headCommitHash; 
+
+            if (eventName == 'pull_request') {
+                headCommitHash = github.context.payload.pull_request
+            } else {
+                undefined
+            }
+
+            console.log(headCommitHash);
+
             const commitHash = github.context.sha;
 
             const commit = await octokit.git.getCommit({
@@ -26,7 +36,7 @@ async function run() {
                 commit_sha: commitHash
             });
 
-            console.log(commit);
+            console.log(commit.data.message);
         } else {
             core.setOutput('stop-code', 'nothing')
         }
