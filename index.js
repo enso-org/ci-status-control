@@ -20,7 +20,7 @@ async function run() {
         if (eventName == 'push' || eventName == 'pull_request') {
             const commitHash = github.context.sha;
 
-            console.log(mergeCommitSha);
+            console.log(commitHash);
             console.log(repoOwner);
             console.log(repoName);
             console.log(excludedPaths);
