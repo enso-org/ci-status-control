@@ -49,7 +49,6 @@ async function run() {
                 core.setOutput('stop-code', 'cancel');
 
                 if (stopInternally) {
-                    console.log(actionId);
                     const checks = await octokit.checks.listForRef({
                         owner: repoOwner,
                         repo: repoName,
