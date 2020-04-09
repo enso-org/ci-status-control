@@ -15,7 +15,13 @@ inputs:
     default: 'false'
 outputs:
   stop-code:
-    description: 'The stop code: 0 - continue, 1 - cancel, 2 - skip, 3 - fail'
+    description: |
+      The behaviour of the action:
+      - `continue`
+      - `cancel`
+      - `skip`
+      - `nothing`
+      - `fail`
 runs:
   using: 'node12'
   main: 'index.js'
