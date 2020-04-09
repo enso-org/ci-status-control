@@ -9,6 +9,10 @@ async function run() {
         // `who-to-greet` input defined in action metadata file
         const excludedPaths = core.getInput('excluded-paths').split('\n');
         const stopInternally = core.getInput('stop-internally');
+        const repoPath = core.getInput('github-repo').split("/");
+
+        const repoOwner = repoPath[0]
+        const repoName = repoPath[1]
 
         // We only care about `pull_request` and `push` events as they're the only
         // ones that can change commit messages or files
@@ -20,6 +24,8 @@ async function run() {
 
             console.log(github.repository);
             console.log(mergeCommitSha);
+            console.log(repoOwner);
+            console.log(repoName);
 
             // const commit = await octokit.git.getCommit(
                 // repoOwner,

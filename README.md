@@ -5,7 +5,12 @@ status, or trigger the status itself.
 
 ## Inputs
 
-### 'github-token'
+### `github-repo`
+The GitHub repository owner and name.
+
+- **Optional:** `false`
+
+### `github-token`
 A GitHub authentication token.
 
 - **Optional:** `false`
@@ -28,6 +33,8 @@ Whether or not the action should stop the workflow itself.
 name: Skip CI On Files
 uses: luna/skip-ci-action@0.1
 with:
+    github-repo: ${{ env.GITHUB_REPOSITORY }}
+    github-token: ${{ secrets.GITHUB_TOKEN }}
     excluded-paths:
     - /doc/*
     - README.md
