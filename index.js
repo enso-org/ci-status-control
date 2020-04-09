@@ -17,19 +17,15 @@ async function run() {
 
         if (eventName == 'push' || eventName == 'pull_request') {
             const mergeCommitSha = github.context.sha;
-            const repoName = await github.context.repoName;
-            const repoOwner = await github.context.repoOwner;
 
-            console.log(context);
+            console.log(github.repository);
             console.log(mergeCommitSha);
-            console.log(repoName);
-            console.log(repoOwner);
 
-            const commit = await octokit.git.getCommit(
-                repoOwner,
-                repoName,
-                "cb984466aacf2c39a142a9726e3be8d46709c8bf"
-            );
+            // const commit = await octokit.git.getCommit(
+                // repoOwner,
+                // repoName,
+                // "cb984466aacf2c39a142a9726e3be8d46709c8bf"
+            // );
         } else {
             core.setOutput('stop-code', 'nothing')
         }
