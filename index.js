@@ -42,11 +42,24 @@ async function run() {
                 commit_sha: headCommitHash
             });
 
-            console.log(commit.data.message);
-            console.log(headCommit.data.message);
+            const checkId = github.context.action
 
             if (headCommit.data.message.includes(skipCIMessage)) {
                 console.log("SKIP");
+
+                core.setOutput('stop-code', 'cancel');
+
+                if (stopInternally) {
+                    console.log(checkId);
+                    // await octokit.checks.update({
+                        // owner: repoOwner,
+                        // repo: repoName,
+                        // check_run_id: null,
+                        // status: "completed",
+                        // conclusion: "cancelled"
+                        //
+                    // });
+                }
             } else {
                 console.log("NO SKIP");
             }
