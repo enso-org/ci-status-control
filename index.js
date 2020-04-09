@@ -31,10 +31,12 @@ try {
         const repoName = github.context.repoName;
         const repoOwner = github.context.repoOwner;
 
-        octokit.git.getCommit({repoOwner, repoName, mergeCommitSha})
-            .then((commit) => {
-                console.log(commit.files);
-            });
+        console.log(mergeCommitSha);
+
+        // octokit.git.getCommit({repoOwner, repoName, mergeCommitSha})
+            // .then((commit) => {
+                // console.log(commit.files);
+            // });
     } else {
         core.setOutput('stop-code', 'nothing')
     }
