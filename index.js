@@ -20,16 +20,13 @@ async function run() {
         if (eventName == 'push' || eventName == 'pull_request') {
             const commitHash = github.context.sha;
 
-            console.log(commitHash);
-            console.log(repoOwner);
-            console.log(repoName);
-            console.log(excludedPaths);
-
             const commit = await octokit.git.getCommit({
                 owner: repoOwner,
                 repo: repoName,
                 commit_sha: commitHash
             });
+
+            console.log(commit.message);
         } else {
             core.setOutput('stop-code', 'nothing')
         }
