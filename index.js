@@ -6,6 +6,8 @@ async function run() {
         const token = core.getInput('github-token');
         const octokit = new github.GitHub(token);
 
+        const skipCIMessage = core.getInput('skip-ci-message');
+
         // `who-to-greet` input defined in action metadata file
         const excludedPaths = core.getInput('excluded-paths').split('\n');
         const stopInternally = core.getInput('stop-internally');
@@ -42,6 +44,12 @@ async function run() {
 
             console.log(commit.data.message);
             console.log(headCommit.data.message);
+
+            if (headCommit.data.message.includes(skipCIMessage)) {
+                console.log("SKIP");
+            } else {
+                console.log("NO SKIP");
+            }
         } else {
             core.setOutput('stop-code', 'nothing')
         }

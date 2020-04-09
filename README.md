@@ -20,19 +20,25 @@ A list of paths that should be excluded from CI.
 Whether or not the action should stop the workflow itself.
 
 - **Optional:** `true`
-- **Default:** `false`
+- **Default:** `true`
+
+### `skip-ci-message`
+The string in the commit message used to skip the CI run.
+
+- **Optional:** `true`
+- **Default:** `[skip ci]`
 
 ## Example Usage
 
 ```yaml
-name: Skip CI On Files
+name: Conditionally Skip CI
 uses: luna/skip-ci-action@0.1
 with:
-    github-repo: ${{ env.GITHUB_REPOSITORY }}
-    github-token: ${{ secrets.GITHUB_TOKEN }}
+    github-token: ${{ github.token }}
     excluded-paths:
     - /doc/*
     - README.md
     stop-internally: true
+    skip-ci-message: true
 ```
 

@@ -15,7 +15,11 @@ inputs:
   stop-internally:
     description: 'Whether or not the action should stop the workflow itself.'
     required: false
-    default: 'false'
+    default: 'true'
+  skip-ci-message:
+    description: 'The string in the commit message to skip the CI run.'
+    required: false
+    default: '[skip ci]'
 outputs:
   stop-code:
     description: |
@@ -23,7 +27,7 @@ outputs:
       - `continue`
       - `cancel`
       - `skip`
-      - `nothing`
+      - `neutral`
       - `fail`
 runs:
   using: 'node12'
